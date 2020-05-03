@@ -1,0 +1,42 @@
+rm -rf dns_service log_service lib_service master_service ../ebin/* ../src/*~ test_ebin/* ../test_src/*~ ../test_src/lib_service* ../test_src/container*;
+cp -r /home/pi/erlang/basic/master_service .;
+cp /home/pi/erlang/basic/master_service/src/*.app master_service/ebin;
+erlc -D local -I /home/pi/erlang/basic/include -o master_service/ebin master_service/src/*.erl;
+master_service/src/lib_ets.erl:35: Warning: export_all flag enabled - all functions will be exported
+master_service/src/lib_ets.erl:148: Warning: variable 'L' is unused
+master_service/src/lib_master.erl:25: Warning: export_all flag enabled - all functions will be exported
+master_service/src/lib_master.erl:45: Warning: export_all flag enabled - all functions will be exported
+master_service/src/orchistrater.erl:25: Warning: export_all flag enabled - all functions will be exported
+master_service/src/orchistrater.erl:45: Warning: export_all flag enabled - all functions will be exported
+master_service/src/service_handler.erl:22: Warning: export_all flag enabled - all functions will be exported
+master_service/src/service_handler.erl:42: Warning: variable 'Reply' is unused
+cp -r /home/pi/erlang/basic/lib_service .;
+cp /home/pi/erlang/basic/lib_service/src/*.app lib_service/ebin;
+erlc -D local -I /home/pi/erlang/basic/include -o lib_service/ebin lib_service/src/*.erl;
+cp -r /home/pi/erlang/basic/log_service .;
+cp /home/pi/erlang/basic/log_service/src/*.app log_service/ebin;
+erlc -D local -I /home/pi/erlang/basic/include -o log_service/ebin log_service/src/*.erl;
+cp -r /home/pi/erlang/basic/dns_service .;
+cp /home/pi/erlang/basic/dns_service/src/*.app dns_service/ebin;
+erlc -D local -I /home/pi/erlang/basic/include -o dns_service/ebin dns_service/src/*.erl;
+erlc -D local -I /home/pi/erlang/basic/include -o test_ebin ../test_src/*.erl;
+../test_src/app1_test.erl:16: Warning: export_all flag enabled - all functions will be exported
+../test_src/master_service_test_cases.erl:16: Warning: export_all flag enabled - all functions will be exported
+../test_src/master_service_tests.erl:24: Warning: export_all flag enabled - all functions will be exported
+../test_src/monkey_test.erl:18: Warning: export_all flag enabled - all functions will be exported
+../test_src/start_test_system.erl:26: Warning: export_all flag enabled - all functions will be exported
+../test_src/start_test_system.erl:86: Warning: variable 'IpInfoComputer' is unused
+../test_src/start_test_system.erl:124: Warning: a term is constructed, but never used
+../test_src/start_test_system.erl:124: Warning: the result of the expression is ignored (suppress the warning by assigning the expression to the _ variable)
+../test_src/start_test_system.erl:124: Warning: variable 'R1' is unused
+../test_src/stop_test_system.erl:25: Warning: export_all flag enabled - all functions will be exported
+erl -pa log_service/ebin -pa lib_service/ebin -pa dns_service/ebin -pa master_service/ebin -pa test_ebin -s master_service_tests start -sname pod_master
+Eshell V10.4.2  (abort with ^G)
+(pod_master@asus)1> {lib_master,63,update_configs}
+(pod_master@asus)1> {lib_master,63,update_configs}
+(pod_master@asus)1> {lib_master,119,remove_obsolite}
+(pod_master@asus)1> {lib_master,91,missing,
+            [{"adder_service","localhost",50100},
+             {"adder_service","localhost",40200}]}
+(pod_master@asus)1>   Test passed.
+(pod_master@asus)1> 

@@ -1,0 +1,18 @@
+{syslog_info,{2020,5,3},
+             {21,47,21},
+             na,na,master@asus,service_handler,55,info,
+             ["ok Started ","divi_service","localhost",50020]}.
+{syslog_info,{2020,5,3},
+             {21,47,18},
+             na,na,master@asus,service_handler,55,info,
+             ["ok Started ","adder_service","localhost",50010]}.
+{syslog_info,{2020,5,3},
+             {21,47,16},
+             na,na,master@asus,lib_master,92,info,
+             ["Missing services",
+              [{"adder_service","localhost",50010},
+               {"divi_service","localhost",50020}]]}.
+{syslog_info,{2020,5,3},
+             {21,47,16},
+             na,na,master@asus,master_service,94,info,
+             ["master_service started"]}.
